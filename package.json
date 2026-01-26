@@ -1,0 +1,23 @@
+{
+  "name": "short_beyond",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edsonj82/artillery-ShortBeyond-nfr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edsonj82/artillery-ShortBeyond-nfr/issues"
+  },
+  "homepage": "https://github.com/edsonj82/artillery-ShortBeyond-nfr#readme",
+  "devDependencies": {
+    "artillery": "^2.0.28"
+  }
+}
