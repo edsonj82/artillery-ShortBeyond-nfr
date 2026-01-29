@@ -39,3 +39,16 @@
 -- ✅ 20% erros de email duplicado (status 409)
 -- ✅ Tempo de resposta p95 < 500ms
 -- ✅ User retornado com sucesso no JSON
+
+--------------------------------------------------------------------------------------
+-------------------------------------- SPIKE --------------------------------------
+--------------------------------------------------------------------------------------
+
+-- Faça uma analise no meu teste de performance com base no seguinte criterio de aceitação:
+- ✅ Taxa de sucesso ≥ 95% em todas as fases
+- ✅ Taxa de sucesso ≥ 90% durante o pico (100 req/s)
+- ✅ Latência p95 ≤ 300ms (fora do pico)
+- ✅ Latência p95 ≤ 2s (durante o pico)
+- ✅ Sistema se recupera em ≤ 30s após o pico
+- ✅ Erros 5xx ≤ 3% durante o pico
+- ✅ Sem crashes ou indisponibilidade total

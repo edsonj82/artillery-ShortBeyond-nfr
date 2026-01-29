@@ -8,7 +8,7 @@ config:
       - "password"
   phases:
     - name: "Carga de Usuários"
-      duration: 100
+      duration: 6000
       arrivalRate: 1
   defaults:
     headers:
