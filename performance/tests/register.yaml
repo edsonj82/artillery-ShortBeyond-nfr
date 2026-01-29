@@ -33,7 +33,7 @@ scenarios:
           json:
             name: "Usuario Teste"
             email: "duplicado@theotokus.dev"
-            password: "senha123"
+            password: "pwd123"
           expect:
             - statusCode: 400
             - hasProperty: "message"

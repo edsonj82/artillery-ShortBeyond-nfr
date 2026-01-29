@@ -1,0 +1,41 @@
+--https://claude.ai/
+
+--------------------------------------------------------------------------------------
+-------------------------------------- REGISTER --------------------------------------
+--------------------------------------------------------------------------------------
+
+-- Faça uma analise no meu teste de performance com base no seguinte criterio de aceitação:
+-- register.yaml
+-- register.json
+
+-- ✅ 80% cadastros com sucesso (status 201)
+-- ✅ 20% erros de email duplicado (status 409)
+-- ✅ Tempo de resposta p95 < 500ms
+-- ✅ User retornado com sucesso no JSON
+
+
+--------------------------------------------------------------------------------------
+------------------------------------ LOGIN --------------------------------------
+--------------------------------------------------------------------------------------
+
+-- Faça uma analise no meu teste de performance com base no seguinte criterio de aceitação:
+-- login.yaml
+-- login.json
+
+-- ✅ 70% logins com sucesso (status 200)
+-- ✅ 30% erros de autenticação (status 401)
+-- ✅ Tempo de resposta p95 < 400ms
+-- ✅ Tokens JWT válidos retornados
+
+--------------------------------------------------------------------------------------
+-------------------------------------- PRE-REGISTER --------------------------------------
+--------------------------------------------------------------------------------------
+
+-- Faça uma analise no meu teste de performance com base no seguinte criterio de aceitação:
+-- pre-register.yaml
+-- pre-register.json
+
+-- ✅ 80% cadastros com sucesso (status 201)
+-- ✅ 20% erros de email duplicado (status 409)
+-- ✅ Tempo de resposta p95 < 500ms
+-- ✅ User retornado com sucesso no JSON

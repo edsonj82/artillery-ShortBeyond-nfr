@@ -1,0 +1,31 @@
+config:
+  target: "http://localhost:3333/api"
+  payload:
+    path: "../data/usuarios.csv"
+    fields:
+      - "name"
+      - "email"
+      - "password"
+  phases:
+    - name: "Carga de Usuários"
+      duration: 100
+      arrivalRate: 1
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Cadastro de Usuários do CSV"
+    flow:
+      - post:
+          url: "/auth/register"
+          json:
+            name: "{{ name }}"
+            email: "{{ email }}"
+            password: "{{ password }}"
+          expect:
+            - statusCode: 201
+            - hasProperty: "user"
+            - match:
+                json: "$.message"
+                value: "Usuário cadastrado com sucesso!"
