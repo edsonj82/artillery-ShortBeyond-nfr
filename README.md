@@ -1,167 +1,317 @@
-
 # 📘 Testes de Performance com Artillery e Inteligência Artificial
-
-Este projeto demonstra uma abordagem profissional para **testes de performance em APIs** utilizando **Artillery** aliado ao apoio de **Inteligência Artificial** para interpretação técnica dos relatórios gerados.
-
-O objetivo é simular jornadas reais de usuários, avaliar o comportamento da API sob diferentes padrões de carga e extrair **insights acionáveis** a partir dos resultados.
+## 🧪 Plano de Testes de Performance — API ShortBeyond
 
 ---
 
-## 🎯 Objetivos do Projeto
+## 🎯 1. Objetivos
 
-- Validar a estabilidade da API sob carga progressiva e picos repentinos
-- Medir latência, throughput e taxa de erros em cenários reais
-- Identificar gargalos em autenticação, validações e persistência em banco
-- Utilizar IA para acelerar e qualificar a análise dos relatórios JSON
-- Documentar um modelo replicável de testes de performance
+### 1.1 Objetivo Geral
 
----
+Validar a performance, escalabilidade e estabilidade da API ShortBeyond sob diferentes cargas de trabalho, garantindo que atenda aos requisitos de performance estabelecidos.
 
-## 🧱 Stack Utilizada
+### 1.2 Objetivos Específicos
 
-| Ferramenta | Finalidade |
-|---|---|
-| **Artillery** | Execução dos testes de carga |
-| **Node.js** | Runtime para execução do Artillery |
-| **CSV** | Massa de dados de usuários |
-| **YAML** | Definição dos cenários |
-| **JSON** | Relatórios gerados |
-| **Inteligência Artificial** | Interpretação técnica dos resultados |
+- Verificar tempo de resposta dos endpoints principais
+- Validar capacidade de processamento simultâneo
+- Identificar gargalos de performance
+- Testar comportamento sob cenários de erro
 
 ---
 
-## ⚙️ Configuração do Ambiente para Execução com Artillery
+## 📌 2. Escopo dos Testes
 
-### Instalar Node.js (18+)
+### 2.1 Endpoints Incluídos
 
-```bash
-node -v
-```
+| Endpoint            | Método | Função                | Prioridade |
+|---------------------|--------|------------------------|------------|
+| /health             | GET    | Health check           | Alta       |
+| /api/auth/register  | POST   | Cadastro de usuários   | Alta       |
+| /api/auth/login     | POST   | Autenticação           | Alta       |
+| /api/links          | POST   | Criação de links       | Alta       |
+| /api/links          | GET    | Listagem de links      | Média      |
 
-Download: https://nodejs.org/
+### 2.2 Cenários de Teste
 
----
+- Cenários de Sucesso: Fluxos normais de operação
+- Cenários de Erro: Validações e tratamento de erros
+- Cenários Mistos: Simulação de uso real com sucessos e falhas
 
-### Instalar Artillery globalmente
+### 2.3 Fora do Escopo
 
-```bash
-npm install -g artillery
-```
-
-Verificar:
-
-```bash
-artillery -V
-```
-
-Documentação oficial:  
-https://www.artillery.io/docs
+- Testes de segurança (pentest)
+- Testes funcionais detalhados
 
 ---
 
-## ▶️ Como Executar os Testes
+## 🎯 3. Estratégia de Testes
 
-Executar cenários e gerar relatórios:
+### 3.1 Tipos de Teste
 
-```bash
-artillery run login.yaml --output login.json
-artillery run pre-register.yaml --output pre-register.json
-artillery run register.yaml --output register.json
-artillery run spike.yaml --output spike.json
-```
+| Tipo        | Objetivo                   | Duração | Arrival Rate     |
+|-------------|----------------------------|---------|------------------|
+| Smoke Test  | Verificação básica         | 30s     | 1–2 req/s        |
+| Load Test   | Carga normal               | 60s     | 5–10 req/s       |
+| Stress Test | Limite da aplicação        | 60s     | 15–25 req/s      |
+| Spike Test  | Picos de tráfego           | 30s     | 1 → 50 req/s     |
 
----
+### 3.2 Abordagem
 
-## 🔗 Comandos Úteis do Artillery
-
-```bash
-artillery run <cenario>.yaml --output <relatorio>.json
-artillery report <relatorio>.json
-BASE_URL=https://api.suaaplicacao.com artillery run login.yaml
-artillery run login.yaml -o login.json -w 4
-```
-
-Referências oficiais:
-
-- https://www.artillery.io/docs
-- https://www.artillery.io/docs/reference/test-script
-- https://www.artillery.io/docs/reference/data-sources
-- https://www.artillery.io/docs/reference/reports
+- Testes isolados: Cada endpoint testado separadamente
+- Testes integrados: Fluxos completos de usuário
+- Progressão gradual: Aumento incremental de carga
+- Cenários realistas: Proporção de sucessos/erros baseada em dados reais
 
 ---
 
-## 🗂️ Estrutura dos Arquivos
+## 🖥️ 4. Ambiente de Teste
 
-```
-.
-├── login.yaml
-├── pre-register.yaml
-├── register.yaml
-├── spike.yaml
-├── users.csv
-├── login.json
-├── pre-register.json
-├── register.json
-├── spike.json
+### 4.1 Configuração
+
+- URL Base: http://localhost:3333
+- Ferramenta: Artillery
+- SO: Linux / macOS / Windows
+- Node: v20+
+
+### 4.2 Estrutura de Arquivos
+
+
+├── data
+│ └── usuarios.csv
+├── tests
+│ ├── health.yaml
+│ ├── register.yaml
+│ ├── pre-register.yaml
+│ ├── login.yaml
+│ └── spike.yaml
+├── reports
+│ ├── health.json
+│ ├── register.json
+│ ├── pre-register.json
+│ ├── login.json
+│ └── spike.json
 └── README.md
-```
+
+
+### 4.3 Dados de Teste
+
+- Usuários: 50 usuários pré-cadastrados
+- Emails únicos: Gerados com UUID
+- Senhas: Padronizadas para teste
 
 ---
 
-## 👥 Massa de Dados
+## 🧪 5. Cenários de Teste Detalhados
 
-```csv
-name,email,password
-```
+### 5.1 Health Check — tests/health.yaml
 
-A massa é utilizada dinamicamente pelos cenários para simular usuários reais.
+**Objetivo**: Verificar disponibilidade da API
 
----
+```yaml
+config:
+  target: "http://localhost:3333"
+  phases:
+    - name: "health-check"
+      duration: 30
+      arrivalRate: 5
 
-## 🧪 Cenários Implementados (Visão em Grade)
+scenarios:
+  - name: "Health Check"
+    flow:
+      - get:
+          url: "/health"
+          expect:
+            - statusCode: 200
+            - equals: ["shortbeyond-api", "{{ service }}"]
+            - equals: ["healthy", "{{ status }}"]
 
-| Cenário | Objetivo | Fluxo Executado | O que o teste revela |
-|---|---|---|---|
-| 🔐 **Login** (`login.yaml`) | Validar autenticação sob carga | Credenciais → Token → Latência | Gargalos em autenticação e banco |
-| 📝 **Pré-Cadastro** (`pre-register.yaml`) | Entrada massiva de usuários | Dados iniciais → Validações | Gargalos em regras de negócio |
-| 🧾 **Cadastro Completo** (`register.yaml`) | Finalização de cadastro | Complemento → Persistência | Locks, escrita concorrente |
-| ⚡ **Spike Test** (`spike.yaml`) | Pico abrupto de requisições | Aumento repentino de VUs | Resiliência e recuperação |
 
----
+✅ Critérios de Aceitação
 
-## 📊 Interpretação dos Relatórios (JSON)
+100% de sucessos (status 200)
 
-| Campo | Significado |
-|---|---|
-| `latency.p95` | Tempo máximo para 95% das requisições |
-| `latency.p99` | Limite extremo de lentidão |
-| `errors` | Quantidade de falhas |
-| `throughput` | Requisições por segundo |
-| `scenariosCreated` | Total de execuções |
+Tempo de resposta p95 < 50ms
 
----
-
-## 🧠 Uso de Inteligência Artificial na Análise
-
-Os relatórios JSON foram analisados com apoio de IA para:
-
-- Identificar padrões de degradação
-- Interpretar grandes volumes de métricas rapidamente
-- Sugerir possíveis causas técnicas de gargalos
-- Apoiar decisões técnicas do time
-
-Essa abordagem reduz drasticamente o tempo de análise manual.
+0% de erros
 
 ---
 
-## 🚀 Próximos Passos
+5.2 Cadastro de Usuários — tests/register.yaml
 
-- Incluir gráficos gerados a partir dos JSON
-- Comparar execuções antes/depois de otimizações
-- Integrar execução em pipeline CI/CD
-- Criar dashboards contínuos
+Objetivo: Testar cadastro com cenários de sucesso e email duplicado
+
+config:
+  target: "http://localhost:3333/api"
+  phases:
+    - name: "cadastros"
+      duration: 45
+      arrivalRate: 3
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Cadastro com Sucesso"
+    weight: 80
+    flow:
+      - post:
+          url: "/auth/register"
+          json:
+            name: "Usuario {{ $uuid }}"
+            email: "usuario-{{ $uuid }}@teste.com"
+            password: "senha123"
+          expect:
+            - statusCode: 201
+
+  - name: "Email Duplicado"
+    weight: 20
+    flow:
+      - post:
+          url: "/auth/register"
+          json:
+            name: "Usuario Teste"
+            email: "duplicado@teste.com"
+            password: "senha123"
+          expect:
+            - statusCode: 409
+
+✅ Critérios de Aceitação
+
+80% cadastros com sucesso (201)
+
+20% erro de email duplicado (409)
+
+Tempo de resposta p95 < 500ms
 
 ---
+5.3 Login de Usuários — tests/login.yaml
+
+config:
+  target: "http://localhost:3333/api"
+  payload:
+    path: "./data/usuarios.csv"
+    fields: ["name", "email", "password"]
+  phases:
+    - name: "login-test"
+      duration: 60
+      arrivalRate: 4
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Login com Sucesso"
+    weight: 70
+    flow:
+      - post:
+          url: "/auth/login"
+          json:
+            email: "{{ email }}"
+            password: "{{ password }}"
+          expect:
+            - statusCode: 200
+            - hasProperty: "data.token"
+
+  - name: "Senha Incorreta"
+    weight: 30
+    flow:
+      - post:
+          url: "/auth/login"
+          json:
+            email: "{{ email }}"
+            password: "senha-incorreta"
+          expect:
+            - statusCode: 401
+
+✅ Critérios de Aceitação
+
+70% logins com sucesso (200)
+
+30% erros de autenticação (401)
+
+Tempo de resposta p95 < 400ms
+
+Tokens JWT válidos retornados
+
+---
+
+5.4 Spike Test — tests/spike.yaml
+
+config:
+  target: "http://localhost:3333/api"
+  payload:
+    path: "../data/usuarios.csv"
+    fields: ["name", "email", "password"]
+  phases:
+    - name: "warmup"
+      duration: 30
+      arrivalRate: 5
+    - name: "ramp-up"
+      duration: 20
+      arrivalRate: 5
+      rampTo: 20
+    - name: "spike"
+      duration: 30
+      arrivalRate: 100
+    - name: "recovery"
+      duration: 10
+      arrivalRate: 5
+
+scenarios:
+  - name: "Criar Link"
+    flow:
+      - post:
+          url: "/auth/login"
+          json:
+            email: "{{ email }}"
+            password: "{{ password }}"
+          capture:
+            json: "$.data.token"
+            as: "authToken"
+
+      - post:
+          url: "/links"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          json:
+            original_url: "https://instgram.com/papitoqa"
+            title: "Instagram do Papito"
+          expect:
+            - statusCode: 201
+
+
+✅ Critérios de Aceitação — Teste de Pico
+
+Taxa de sucesso ≥ 95% em todas as fases
+
+Taxa de sucesso ≥ 90% durante o pico (100 req/s)
+
+Latência p95 ≤ 300ms (fora do pico)
+
+Latência p95 ≤ 2s (durante o pico)
+
+Sistema se recupera em ≤ 30s após o pico
+
+Erros 5xx ≤ 3% durante o pico
+
+Sem crashes ou indisponibilidade total
+---
+
+🖥️ 6. Comandos de Execução
+
+Caso não precise gerar relatório .json, execute apenas até o .yaml
+
+Com relatório
+
+npx artillery run performance/tests/health.yaml --output performance/reports/health.json
+npx artillery run performance/tests/register.yaml --output performance/reports/register.json
+npx artillery run performance/tests/pre-register.yaml --output performance/reports/pre-register.json
+npx artillery run performance/tests/login.yaml --output performance/reports/login.json
+npx artillery run performance/tests/spike.yaml --output performance/reports/spike.json
+
+Sem relatório
+
+npx artillery run performance/tests/health.yaml
+
 
 ## 👨‍💻 Autor
 
