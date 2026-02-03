@@ -124,7 +124,7 @@ scenarios:
             - equals: ["shortbeyond-api", "{{ service }}"]
             - equals: ["healthy", "{{ status }}"]
 
-
+```
 ✅ Critérios de Aceitação
 
 100% de sucessos (status 200)
@@ -135,10 +135,10 @@ Tempo de resposta p95 < 50ms
 
 ---
 
-5.2 Cadastro de Usuários — tests/register.yaml
+### 5.2 Cadastro de Usuários — tests/register.yaml
 
 Objetivo: Testar cadastro com cenários de sucesso e email duplicado
-
+```yaml
 config:
   target: "http://localhost:3333/api"
   phases:
@@ -173,7 +173,7 @@ scenarios:
             password: "senha123"
           expect:
             - statusCode: 409
-
+```
 ✅ Critérios de Aceitação
 
 80% cadastros com sucesso (201)
@@ -183,8 +183,8 @@ scenarios:
 Tempo de resposta p95 < 500ms
 
 ---
-5.3 Login de Usuários — tests/login.yaml
-
+### 5.3 Login de Usuários — tests/login.yaml
+```yaml
 config:
   target: "http://localhost:3333/api"
   payload:
@@ -221,7 +221,7 @@ scenarios:
             password: "senha-incorreta"
           expect:
             - statusCode: 401
-
+```
 ✅ Critérios de Aceitação
 
 70% logins com sucesso (200)
@@ -234,8 +234,8 @@ Tokens JWT válidos retornados
 
 ---
 
-5.4 Spike Test — tests/spike.yaml
-
+### 5.4 Spike Test — tests/spike.yaml
+```yaml
 config:
   target: "http://localhost:3333/api"
   payload:
@@ -277,7 +277,7 @@ scenarios:
             title: "Instagram do Papito"
           expect:
             - statusCode: 201
-
+```
 
 ✅ Critérios de Aceitação — Teste de Pico
 
