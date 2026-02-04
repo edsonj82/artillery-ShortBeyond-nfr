@@ -135,7 +135,7 @@ scenarios:
 
 ### 5.2 Cadastro de Usuários — tests/register.yaml
 
-Objetivo: Testar cadastro com cenários de sucesso e email duplicado
+**Objetivo**: Testar cadastro com cenários de sucesso e email duplicado
 ```yaml
 config:
   target: "http://localhost:3333/api"
@@ -180,6 +180,8 @@ scenarios:
 
 ---
 ### 5.3 Login de Usuários — tests/login.yaml
+**Objetivo**: Testar autenticação com credenciais válidas e inválidas
+
 ```yaml
 config:
   target: "http://localhost:3333/api"
@@ -228,6 +230,8 @@ scenarios:
 ---
 
 ### 5.4 Spike Test — tests/spike.yaml
+**Objetivo**: Testar CRUD de links com usuários autenticados
+
 ```yaml
 config:
   target: "http://localhost:3333/api"
@@ -285,7 +289,7 @@ scenarios:
 
 ## 🖥️ 6. Comandos de Execução
 
-### Observação: Caso não precise gerar relatório .json, execute apenas até o .yaml
+**Observação**: Caso não precise gerar relatório .json, execute apenas até o .yaml
 
 ### Com relatório
 ```
