@@ -127,11 +127,9 @@ scenarios:
 ```
 ✅ Critérios de Aceitação
 
-100% de sucessos (status 200)
-
-Tempo de resposta p95 < 50ms
-
-0% de erros
+- 100% de sucessos (status 200)
+- Tempo de resposta p95 < 50ms
+- 0% de erros
 
 ---
 
@@ -176,11 +174,9 @@ scenarios:
 ```
 ✅ Critérios de Aceitação
 
-80% cadastros com sucesso (201)
-
-20% erro de email duplicado (409)
-
-Tempo de resposta p95 < 500ms
+- 80% cadastros com sucesso (201)
+- 20% erro de email duplicado (409)
+- Tempo de resposta p95 < 500ms
 
 ---
 ### 5.3 Login de Usuários — tests/login.yaml
@@ -224,13 +220,10 @@ scenarios:
 ```
 ✅ Critérios de Aceitação
 
-70% logins com sucesso (200)
-
-30% erros de autenticação (401)
-
-Tempo de resposta p95 < 400ms
-
-Tokens JWT válidos retornados
+- 70% logins com sucesso (200)
+- 30% erros de autenticação (401)
+- Tempo de resposta p95 < 400ms
+- Tokens JWT válidos retornados
 
 ---
 
@@ -281,19 +274,13 @@ scenarios:
 
 ✅ Critérios de Aceitação — Teste de Pico
 
-Taxa de sucesso ≥ 95% em todas as fases
-
-Taxa de sucesso ≥ 90% durante o pico (100 req/s)
-
-Latência p95 ≤ 300ms (fora do pico)
-
-Latência p95 ≤ 2s (durante o pico)
-
-Sistema se recupera em ≤ 30s após o pico
-
-Erros 5xx ≤ 3% durante o pico
-
-Sem crashes ou indisponibilidade total
+- Taxa de sucesso ≥ 95% em todas as fases
+- Taxa de sucesso ≥ 90% durante o pico (100 req/s)
+- Latência p95 ≤ 300ms (fora do pico)
+- Latência p95 ≤ 2s (durante o pico)
+- Sistema se recupera em ≤ 30s após o pico
+- Erros 5xx ≤ 3% durante o pico
+- Sem crashes ou indisponibilidade total
 ---
 
 🖥️ 6. Comandos de Execução
