@@ -74,7 +74,7 @@ Validar a performance, escalabilidade e estabilidade da API ShortBeyond sob dife
 
 ### 4.2 Estrutura de Arquivos
 
-
+```
 ├── data
 │ └── usuarios.csv
 ├── tests
@@ -90,7 +90,7 @@ Validar a performance, escalabilidade e estabilidade da API ShortBeyond sob dife
 │ ├── login.json
 │ └── spike.json
 └── README.md
-
+```
 
 ### 4.3 Dados de Teste
 
@@ -283,22 +283,22 @@ scenarios:
 - Sem crashes ou indisponibilidade total
 ---
 
-🖥️ 6. Comandos de Execução
+### 🖥️ 6. Comandos de Execução
 
 Caso não precise gerar relatório .json, execute apenas até o .yaml
 
-Com relatório
-
+## Com relatório
+```
 npx artillery run performance/tests/health.yaml --output performance/reports/health.json
 npx artillery run performance/tests/register.yaml --output performance/reports/register.json
 npx artillery run performance/tests/pre-register.yaml --output performance/reports/pre-register.json
 npx artillery run performance/tests/login.yaml --output performance/reports/login.json
 npx artillery run performance/tests/spike.yaml --output performance/reports/spike.json
-
-Sem relatório
-
+```
+## Sem relatório
+```
 npx artillery run performance/tests/health.yaml
-
+```
 
 ## 👨‍💻 Autor
 
